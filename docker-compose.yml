@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    working_dir: /cloudwalk_challenge
+    env_file:
+      - ".env"
+    ports:
+      - 3000:3000
+    volumes:
+      - ".:/cloudwalk_challenge"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      # User: postgres / No password
+      POSTGRES_HOST_AUTH_METHOD: "trust"
